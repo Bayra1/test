@@ -1,33 +1,21 @@
-const express = require("express");
-const { graphqlHTTP } = require("express-graphql");
-const {
+import express from "express";
+import { graphqlHTTP } from "express-graphql";
+import {
   GraphQLSchema,
   GraphQLObjectType,
   GraphQLString,
   GraphQLList,
   GraphQLInt,
   GraphQLNonNull,
-} = require("graphql");
+} from "graphql";
+import { authors } from "./Authors.js";
+import { books } from "./Books.js";
 
 const app = express();
 
-const authors = [
-  { id: 1, name: "J.K.Rowling" },
-  { id: 2, name: "Me" },
-  { id: 3, name: "Bosoo" },
-  { id: 4, name: "UUgii" },
-];
-
-const books = [
-  { id: 1, name: "Harry Poter 1 section", authorId: 1 },
-  { id: 2, name: "Hard Lesson", authorId: 2 },
-  { id: 3, name: "Life of Lie", authorId: 3 },
-  { id: 4, name: "Fortune to be black", authorId: 4 },
-];
-
 const BookType = new GraphQLObjectType({
   name: "Book",
-  description: "this represents a book written by an author",
+  description: "This represents a book written by an author",
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLInt) },
     name: { type: new GraphQLNonNull(GraphQLString) },
@@ -43,7 +31,7 @@ const BookType = new GraphQLObjectType({
 
 const AuthorType = new GraphQLObjectType({
   name: "Author",
-  description: "this represents an author",
+  description: "This represents an author",
   fields: () => ({
     id: { type: new GraphQLNonNull(GraphQLInt) },
     name: { type: new GraphQLNonNull(GraphQLString) },
@@ -58,11 +46,11 @@ const AuthorType = new GraphQLObjectType({
 
 const RootQueryType = new GraphQLObjectType({
   name: "Query",
-  description: "Test for Root Query",
+  description: "Root Query",
   fields: () => ({
     SingleBook: {
       type: BookType,
-      description: "this is single book",
+      description: "This is a single book",
       args: {
         id: { type: GraphQLInt },
       },
@@ -156,4 +144,6 @@ app.use(
   })
 );
 
-app.listen(3000, () => console.log("server is running"));
+const PORT = 3000;
+
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));

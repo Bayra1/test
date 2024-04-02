@@ -2,9 +2,10 @@
   "name": "test",
   "version": "1.0.0",
   "description": "",
-  "main": "sever.js",
+  "main": "server.mjs",
+  "type": "module", 
   "scripts": {
-    "test": "nodemon server.js"
+    "start": "nodemon server.mjs"
   },
   "author": "",
   "license": "ISC",
