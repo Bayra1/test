@@ -86,7 +86,7 @@ const RootMutationType = new GraphQLObjectType({
       type: BookType,
       description: "Add a Book",
       args: {
-        name: { type: GraphQLNonNull(GraphQLString) },
+        name: { type: GraphQLNonNull(GraphQLString) },        
         authorId: { type: GraphQLNonNull(GraphQLInt) },
       },
       resolve: (parent, args) => {
